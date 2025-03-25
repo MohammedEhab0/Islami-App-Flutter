@@ -1,5 +1,5 @@
 class QuranContent {
-  List<String> arabicAuranSuras = [
+  static List<String> arabicAuranSuras = [
     "الفاتحه",
     "البقرة",
     "آل عمران",
@@ -115,7 +115,7 @@ class QuranContent {
     "الفلق",
     "الناس"
   ];
-  List<String> englishQuranSurahs = [
+  static List<String> englishQuranSurahs = [
     "Al-Fatiha",
     "Al-Baqarah",
     "Aal-E-Imran",
@@ -231,7 +231,7 @@ class QuranContent {
     "Al-Falaq",
     "An-Nas"
   ];
-  List<String> AyaNumber = [
+  static List<String> AyaNumber = [
     '7',
     '286',
     '200',

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'Ui/HomeScreen/HomeScreen.dart';
+import 'Ui/HomeScreen/tabs/QuranTab/QuranDetails.dart';
 import 'Ui/Introdaction/Intro.dart';
 import 'Utils/AppTheme.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         routes: {
           HomeScreen.routeName: (context) => const HomeScreen(),
           Intro.routeName: (context) => const Intro(),
+          QuranDetails.routeName: (context) => QuranDetails(),
         });
   }
 }

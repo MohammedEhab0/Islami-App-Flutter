@@ -19,5 +19,7 @@ class AppAssets {
   static String mus7af = 'assets/images/mus7af.png';
   static String ayaIcon = 'assets/images/ayaIcon.png';
   static String Loge = 'assets/images/Logo.png';
-
+  static String BotomShape = 'assets/images/BotomShape.png';
+  static String LeftShape = 'assets/images/LeftShape.png';
+  static String rightShape = 'assets/images/rightShape.png';
 }
