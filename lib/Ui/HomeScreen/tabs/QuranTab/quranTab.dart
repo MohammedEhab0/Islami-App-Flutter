@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:islami/Ui/HomeScreen/tabs/QuranTab/MostRecent.dart';
 import 'package:islami/Ui/HomeScreen/tabs/QuranTab/QuranDetails.dart';
+import 'package:islami/Ui/HomeScreen/tabs/QuranTab/SuraList.dart';
 import 'package:islami/Utils/AppAssets.dart';
 import 'package:islami/Utils/AppColors.dart';
 import 'package:islami/Utils/AppStyles.dart';
 import 'package:islami/Utils/QuranContent.dart';
+import 'package:provider/provider.dart';
 
-class QuranTab extends StatelessWidget {
+import '../../../../Providers/MostRecentProviders.dart';
+import '../../../../Utils/SharedPreferences.dart';
+
+class QuranTab extends StatefulWidget {
   const QuranTab({super.key});
+
+  @override
+  State<QuranTab> createState() => _QuranTabState();
+}
+
+class _QuranTabState extends State<QuranTab> {
+  List<int> filterList = List.generate(114, (index) => index);
+  late MostRecentProviders provider;
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    provider = Provider.of<MostRecentProviders>(context);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: width * .0465),
       child: Column(
@@ -21,6 +36,10 @@ class QuranTab extends StatelessWidget {
           Padding(
               padding: EdgeInsets.symmetric(vertical: height * .01),
               child: TextField(
+                style: AppStyles.bold16White,
+                onChanged: (newText) {
+                  filterByNewText(newText);
+                },
                 cursorColor: AppColors.gold,
                 decoration: InputDecoration(
                     hintText: 'Sura Name',
@@ -40,61 +59,7 @@ class QuranTab extends StatelessWidget {
                         borderSide:
                             BorderSide(color: AppColors.gold, width: 2))),
               )),
-          SizedBox(height: height * .01),
-          Text(
-            'Must recsnt',
-            style: AppStyles.bold16White,
-          ),
-          SizedBox(height: height * .01),
-          Container(
-            height: height * .17,
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-            child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                    width: width * .70,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: AppColors.gold,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                QuranContent.englishQuranSurahs[index],
-                                style: AppStyles.bold20black,
-                              ),
-                              Text(
-                                QuranContent.arabicAuranSuras[index],
-                                style: AppStyles.bold20black,
-                              ),
-                              Text(
-                                QuranContent.AyaNumber[index] + ' Verses',
-                                style: AppStyles.bold16black,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Image.asset(
-                          AppAssets.mus7af,
-                          fit: BoxFit.fitWidth,
-                        )
-                      ],
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) =>
-                    SizedBox(width: width * .02),
-                itemCount: QuranContent.arabicAuranSuras.length),
-          ),
+          MostRecent(),
           SizedBox(height: height * .02),
           Text(
             'Suras List',
@@ -107,41 +72,12 @@ class QuranTab extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(QuranDetails.routeName, arguments: index);
+                      Navigator.of(context).pushNamed(QuranDetails.routeName,
+                          arguments: filterList[index]);
+                      provider.updateMostResentList(filterList[index]);
                     },
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Image.asset(AppAssets.ayaIcon),
-                              Text('${index + 1}', style: AppStyles.bold16White)
-                            ],
-                          ),
-                          SizedBox(width: width * .08),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                QuranContent.englishQuranSurahs[index],
-                                style: AppStyles.bold20White,
-                              ),
-                              SizedBox(height: height * .01),
-                              Text(
-                                QuranContent.AyaNumber[index] + ' Verses',
-                                style: AppStyles.bold16White,
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                          Text(
-                            QuranContent.arabicAuranSuras[index],
-                            style: AppStyles.bold20White,
-                          )
-                        ],
-                      ),
+                    child: SuraList(
+                      index: filterList[index],
                     ),
                   );
                 },
@@ -156,10 +92,27 @@ class QuranTab extends StatelessWidget {
                     ),
                   );
                 },
-                itemCount: QuranContent.arabicAuranSuras.length),
+                itemCount: filterList.length),
           ),
         ],
       ),
     );
+  }
+
+  void filterByNewText(String newText) {
+    List<int> newFilterList = [];
+    for (int i = 0; i < QuranContent.arabicAuranSuras.length; i++) {
+      if (QuranContent.arabicAuranSuras[i]
+          .toLowerCase()
+          .contains(newText.toLowerCase())) {
+        newFilterList.add(i);
+      } else if (QuranContent.englishQuranSurahs[i]
+          .toLowerCase()
+          .contains(newText.toLowerCase())) {
+        newFilterList.add(i);
+      }
+    }
+    filterList = newFilterList;
+    setState(() {});
   }
 }

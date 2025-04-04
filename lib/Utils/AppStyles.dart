@@ -5,6 +5,8 @@ import 'AppColors.dart';
 class AppStyles {
   static TextStyle bold16White = TextStyle(
       fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.White);
+  static TextStyle bold32White = TextStyle(
+      fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.White);
   static TextStyle bold24White = TextStyle(
       fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.White);
   static TextStyle bold20White = TextStyle(
@@ -19,6 +21,8 @@ class AppStyles {
       fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.Black);
   static TextStyle bold20black = TextStyle(
       fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.Black);
+  static TextStyle bold18black = TextStyle(
+      fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.Black);
   static TextStyle bold24black = TextStyle(
       fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.Black);
 }

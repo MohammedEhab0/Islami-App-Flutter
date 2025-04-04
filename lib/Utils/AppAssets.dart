@@ -22,4 +22,12 @@ class AppAssets {
   static String BotomShape = 'assets/images/BotomShape.png';
   static String LeftShape = 'assets/images/LeftShape.png';
   static String rightShape = 'assets/images/rightShape.png';
+  static String cornerrRi = 'assets/images/Cornerr2.png';
+  static String cornerrLeft = 'assets/images/Cornerr1.png';
+  static String HadethBackground = 'assets/images/HadithCardBackGround 1.png';
+  static String mosque = 'assets/images/Mosque2.png';
+  static String sebhaEnd = 'assets/images/SebhaEnd.png';
+  static String sebhaBody = 'assets/images/SebhaBody.png';
+  static String morningAzkar = 'assets/images/MorningAzkar.png';
+  static String eveningAzkar = 'assets/images/bell-icon.png';
 }
