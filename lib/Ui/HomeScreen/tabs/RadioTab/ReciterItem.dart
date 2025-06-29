@@ -4,25 +4,35 @@ import 'package:islami/Utils/AppAssets.dart';
 import 'package:islami/Utils/AppColors.dart';
 import 'package:islami/Utils/AppStyles.dart';
 
-import '../../../../model/radios.dart';
+import '../../../../model/reciters.dart';
 
-class RadioListWidget extends StatefulWidget {
-  final List<RadioItem> radioList;
+class ReciterListWidget extends StatefulWidget {
+  final List<Reciter> reciterList;
 
-  const RadioListWidget({super.key, required this.radioList});
+  const ReciterListWidget({super.key, required this.reciterList});
 
   @override
-  State<RadioListWidget> createState() => _RadioListWidgetState();
+  State<ReciterListWidget> createState() => _ReciterListWidgetState();
 }
 
-class _RadioListWidgetState extends State<RadioListWidget> {
+class _ReciterListWidgetState extends State<ReciterListWidget> {
   final AudioPlayer player = AudioPlayer();
   int? playingIndex;
   bool isPlaying = false;
   Map<int, bool> volumeStates = {};
 
+  /// Builds full URL (e.g., server/001.mp3)
+  String? getReciterUrl(int index) {
+    final baseUrl = widget.reciterList[index].moshaf?.first.server;
+    if (baseUrl == null) return null;
+    final surahIndex = (index + 1).toString().padLeft(3, '0');
+    return baseUrl.endsWith('/')
+        ? "$baseUrl$surahIndex.mp3"
+        : "$baseUrl/$surahIndex.mp3";
+  }
+
   void togglePlay(int index) async {
-    final url = widget.radioList[index].url;
+    final url = getReciterUrl(index);
     if (url == null) return;
 
     if (playingIndex == index && isPlaying) {
@@ -38,7 +48,7 @@ class _RadioListWidgetState extends State<RadioListWidget> {
           isPlaying = true;
         });
       } catch (e) {
-        debugPrint("Error playing radio stream: $url\n$e");
+        debugPrint("Error playing URL: $url\n$e");
       }
     }
   }
@@ -62,10 +72,10 @@ class _RadioListWidgetState extends State<RadioListWidget> {
 
     return ListView.separated(
       padding: EdgeInsets.symmetric(vertical: height * 0.008),
-      itemCount: widget.radioList.length,
+      itemCount: widget.reciterList.length,
       separatorBuilder: (context, index) => SizedBox(height: height * 0.019),
       itemBuilder: (context, index) {
-        final radio = widget.radioList[index];
+        final reciter = widget.reciterList[index];
         final isCurrent = playingIndex == index && isPlaying;
         final isVolumeOpen = volumeStates[index] ?? true;
 
@@ -81,7 +91,7 @@ class _RadioListWidgetState extends State<RadioListWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                radio.name ?? 'No Name',
+                reciter.name ?? 'No Name',
                 style: AppStyles.bold18black,
                 overflow: TextOverflow.ellipsis,
               ),

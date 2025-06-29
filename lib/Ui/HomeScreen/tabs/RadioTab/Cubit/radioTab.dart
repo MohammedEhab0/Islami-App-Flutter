@@ -5,6 +5,7 @@ import 'package:islami/Ui/HomeScreen/tabs/RadioTab/RadioItem.dart';
 import 'package:islami/Utils/AppColors.dart';
 
 import '../../../../../Utils/AppStyles.dart';
+import '../ReciterItem.dart';
 import 'RadioTabViewModel.dart';
 
 class RadioTab extends StatefulWidget {
@@ -99,7 +100,7 @@ class _RadioTabState extends State<RadioTab> {
                     ],
                   );
                 } else if (state is ReciterTabSuccessState) {
-                  return RadioListWidget(
+                  return ReciterListWidget(
                     reciterList: state.reciters,
                   );
                 } else {
