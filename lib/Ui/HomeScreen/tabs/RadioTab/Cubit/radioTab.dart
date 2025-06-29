@@ -22,6 +22,7 @@ class _RadioTabState extends State<RadioTab> {
   void initState() {
     super.initState();
     viewModel.fetchReciters();
+    viewModel.fetchRadio();
   }
 
   @override
@@ -43,7 +44,7 @@ class _RadioTabState extends State<RadioTab> {
                     setState(() {
                       selectedIndex = 0;
                     });
-                    viewModel.fetchReciters();
+                    viewModel.fetchRadio();
                   },
                 ),
               ),
@@ -81,9 +82,25 @@ class _RadioTabState extends State<RadioTab> {
                     ],
                   );
                 } else if (state is RadioTabSuccessState) {
-                  return RadioItem(
-                    itemCount: state.reciters.length,
-                    radioList: state.reciters,
+                  return RadioListWidget(
+                    radioList: state.radios,
+                  );
+                } else if (state is ReciterTabLoadingState) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is ReciterTabErrorState) {
+                  return Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      Text(
+                        'حدث خطأ أثناء تحميل القراء.\nيرجى المحاولة لاحقًا.',
+                        style: AppStyles.bold16White,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  );
+                } else if (state is ReciterTabSuccessState) {
+                  return RadioListWidget(
+                    reciterList: state.reciters,
                   );
                 } else {
                   return const Center(child: Text("Something went wrong."));

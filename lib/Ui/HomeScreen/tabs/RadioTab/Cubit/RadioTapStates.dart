@@ -1,3 +1,5 @@
+import 'package:islami/model/radios.dart';
+
 import '../../../../../model/reciters.dart';
 
 abstract class RadioTabState {}
@@ -11,9 +13,9 @@ class RadioTabErrorState extends RadioTabState {
 }
 
 class RadioTabSuccessState extends RadioTabState {
-  final List<Reciter> reciters;
+  final List<RadioItem> radios;
 
-  RadioTabSuccessState({required this.reciters});
+  RadioTabSuccessState({required this.radios});
 }
 
 class ReciterTabErrorState extends RadioTabState {

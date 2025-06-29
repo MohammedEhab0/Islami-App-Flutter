@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:islami/Utils/AppColors.dart';
 import 'package:islami/Utils/AppStyles.dart';
-import 'package:islami/Utils/TimeData.dart';
+
+import 'cubit/TimeViewModel.dart';
 
 class TimeItem extends StatelessWidget {
   int index;
+  List<Pray> prayTimeList;
 
-  TimeItem({super.key, required this.index});
+  TimeItem({super.key, required this.index, required this.prayTimeList});
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +22,13 @@ class TimeItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(
-            TimeData.prayTimeList[index].prayName,
+            prayTimeList[index].prayName,
             style: AppStyles.bold16White,
           ),
           Text(
-            TimeData.prayTimeList[index].prayClock,
+            prayTimeList[index].prayClock,
             style: AppStyles.bold20White,
           ),
-          Text(
-            TimeData.prayTimeList[index].AmOrPm,
-            style: AppStyles.bold16White,
-          )
         ],
       ),
     );
