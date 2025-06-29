@@ -12,6 +12,8 @@ import '../../../../Utils/QuranContent.dart';
 class QuranDetails extends StatefulWidget {
   static const routeName = 'QuranDetails';
 
+  const QuranDetails({super.key});
+
   @override
   State<QuranDetails> createState() => _QuranDetailsState();
 }

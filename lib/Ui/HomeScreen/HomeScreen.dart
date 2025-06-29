@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:islami/Ui/HomeScreen/tabs/QuranTab/quranTab.dart';
 import 'package:islami/Ui/HomeScreen/tabs/HadethTab/hadethTab.dart';
-import 'package:islami/Ui/HomeScreen/tabs/RadioTab/radioTab.dart';
+import 'package:islami/Ui/HomeScreen/tabs/QuranTab/quranTab.dart';
+import 'package:islami/Ui/HomeScreen/tabs/RadioTab/Cubit/radioTab.dart';
 import 'package:islami/Ui/HomeScreen/tabs/SebhaTab/sebhaTab.dart';
 import 'package:islami/Ui/HomeScreen/tabs/TimeTab/timeTab.dart';
 
@@ -99,7 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  builtBottomNavigationBarItem({required int index, required String image}) {
+  StatelessWidget builtBottomNavigationBarItem(
+      {required int index, required String image}) {
     return selectedIndex == index
         ? Container(
             padding: EdgeInsets.symmetric(vertical: 6, horizontal: 20),

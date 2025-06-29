@@ -6,10 +6,11 @@ import '../../../../Utils/AppAssets.dart';
 import '../../../../Utils/AppColors.dart';
 import '../../../../Utils/AppStyles.dart';
 import '../../../../Utils/QuranContent.dart';
-import '../../../../Utils/SharedPreferences.dart';
 import 'QuranDetails.dart';
 
 class MostRecent extends StatefulWidget {
+  const MostRecent({super.key});
+
   @override
   State<MostRecent> createState() => _MostRecentState();
 }
@@ -25,6 +26,7 @@ class _MostRecentState extends State<MostRecent> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
@@ -81,7 +83,7 @@ class _MostRecentState extends State<MostRecent> {
                                     style: AppStyles.bold20black,
                                   ),
                                   Text(
-                                    QuranContent.AyaNumber[index] + ' Verses',
+                                    '${QuranContent.AyaNumber[index]} Verses',
                                     style: AppStyles.bold16black,
                                   ),
                                 ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami/Utils/AppColors.dart';
+
 import '../../../../Utils/AppStyles.dart';
 
 class SuraContent extends StatelessWidget {
@@ -8,7 +9,8 @@ class SuraContent extends StatelessWidget {
   final String aya;
   final Function selectAya;
 
-  SuraContent({
+  const SuraContent({
+    super.key,
     required this.index,
     required this.aya,
     required this.selectAya,
@@ -34,7 +36,7 @@ class SuraContent extends StatelessWidget {
         ),
         child: Text(
           textAlign: TextAlign.center,
-          '[${index + 1}] ${aya}',
+          '[${index + 1}] $aya',
           style: selectedindex == index
               ? AppStyles.bold16black
               : AppStyles.bold16gold,

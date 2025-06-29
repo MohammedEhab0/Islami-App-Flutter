@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.5 <4.0.0'
+  sdk: ">=3.3.0 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -28,11 +28,14 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  lottie: ^2.7.0
+  flutter_bloc: ^9.1.1
+  dio: ^5.8.0+1
+  lottie: ^3.3.1
   carousel_slider: ^5.0.0
   provider: ^6.1.4
   shared_preferences: ^2.2.3
-  flutter_native_splash: ^2.3.7
+  flutter_keyboard_visibility: ^6.0.0
+  flutter_native_splash: ^2.4.0
   flutter:
     sdk: flutter
 
@@ -51,7 +54,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

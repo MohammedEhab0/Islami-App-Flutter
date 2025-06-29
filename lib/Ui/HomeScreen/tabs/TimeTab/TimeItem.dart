@@ -6,7 +6,7 @@ import 'package:islami/Utils/TimeData.dart';
 class TimeItem extends StatelessWidget {
   int index;
 
-  TimeItem({required this.index});
+  TimeItem({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import '../../../../Utils/QuranContent.dart';
 class SuraList extends StatelessWidget {
   int index;
 
-  SuraList({required this.index});
+  SuraList({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class SuraList extends StatelessWidget {
               ),
               SizedBox(height: height * .01),
               Text(
-                QuranContent.AyaNumber[index] + ' Verses',
+                '${QuranContent.AyaNumber[index]} Verses',
                 style: AppStyles.bold16White,
               ),
             ],

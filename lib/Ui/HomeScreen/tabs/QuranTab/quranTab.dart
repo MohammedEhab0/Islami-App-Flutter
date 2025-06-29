@@ -9,7 +9,6 @@ import 'package:islami/Utils/QuranContent.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Providers/MostRecentProviders.dart';
-import '../../../../Utils/SharedPreferences.dart';
 
 class QuranTab extends StatefulWidget {
   const QuranTab({super.key});

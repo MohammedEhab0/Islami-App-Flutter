@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:islami/Ui/HomeScreen/tabs/TimeTab/Azkar.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../../../Utils/AppAssets.dart';
 import '../../../../Utils/AppColors.dart';
@@ -10,6 +9,8 @@ import '../../../../Utils/TimeData.dart';
 import 'TimeItem.dart';
 
 class TimeTab extends StatefulWidget {
+  const TimeTab({super.key});
+
   @override
   State<TimeTab> createState() => _TimeTabState();
 }

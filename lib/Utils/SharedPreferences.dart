@@ -8,11 +8,11 @@ void UpdateMostResentList(int newSuraIndex) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   List<String> MostResentIndciesList =
       prefs.getStringList(PrefsKeys.MostResentKey) ?? [];
-  if (MostResentIndciesList.contains('${newSuraIndex}')) {
-    MostResentIndciesList.remove('${newSuraIndex}');
-    MostResentIndciesList.insert(0, '${newSuraIndex}');
+  if (MostResentIndciesList.contains('$newSuraIndex')) {
+    MostResentIndciesList.remove('$newSuraIndex');
+    MostResentIndciesList.insert(0, '$newSuraIndex');
   } else {
-    MostResentIndciesList.insert(0, '${newSuraIndex}');
+    MostResentIndciesList.insert(0, '$newSuraIndex');
   }
   if (MostResentIndciesList.length > 5) {
     MostResentIndciesList.removeLast();

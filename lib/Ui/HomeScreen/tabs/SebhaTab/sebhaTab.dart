@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:islami/Utils/AppStyles.dart';
+
 import '../../../../Utils/AppAssets.dart';
 
 class SebhaTab extends StatefulWidget {
-  SebhaTab({super.key});
+  const SebhaTab({super.key});
 
   @override
   State<SebhaTab> createState() => _SebhaTabState();

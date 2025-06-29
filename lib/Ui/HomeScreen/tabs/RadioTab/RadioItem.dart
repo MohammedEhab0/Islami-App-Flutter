@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:islami/Utils/AppAssets.dart';
 import 'package:islami/Utils/AppStyles.dart';
-import 'package:islami/Utils/RadioData.dart';
 
 import '../../../../Utils/AppColors.dart';
+import '../../../../model/reciters.dart';
 
 class RadioItem extends StatelessWidget {
-  List<String> radioList;
+  List<Reciter> radioList;
 
   int itemCount;
 
-  RadioItem({required this.itemCount, required this.radioList});
+  RadioItem({super.key, required this.itemCount, required this.radioList});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class RadioItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  radioList[index],
+                  radioList[index].name!,
                   style: AppStyles.bold18black,
                 ),
                 Stack(alignment: Alignment.center, children: [

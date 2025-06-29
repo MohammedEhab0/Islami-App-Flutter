@@ -9,7 +9,7 @@ import 'hadethModel.dart';
 class HadethItem extends StatefulWidget {
   int index;
 
-  HadethItem({required this.index});
+  HadethItem({super.key, required this.index});
 
   @override
   State<HadethItem> createState() => _HadethItemState();
@@ -85,7 +85,7 @@ class _HadethItemState extends State<HadethItem> {
 
   void loadHadethContent(int index) async {
     String HadethContent =
-        await rootBundle.loadString('assets/HadeethFiles/h${index}.txt');
+        await rootBundle.loadString('assets/HadeethFiles/h$index.txt');
     String title = HadethContent.substring(0, HadethContent.indexOf('\n'));
     String content = HadethContent.substring(HadethContent.indexOf('\n') + 1);
     hadeth = HadethModel(content: content, title: title);

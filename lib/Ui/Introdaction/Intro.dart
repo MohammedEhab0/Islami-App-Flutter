@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:islami/Utils/AppAssets.dart';
+
 import '../../Utils/AppColors.dart';
 import '../HomeScreen/HomeScreen.dart';
 
@@ -34,7 +35,7 @@ class _introState extends State<Intro> {
             ),
             title: '',
             body: '',
-            image: Container(
+            image: SizedBox(
               width: double.infinity, // Ensure the container takes full width
               child: Image.asset(
                 AppAssets.intro1,
@@ -49,7 +50,7 @@ class _introState extends State<Intro> {
             ),
             title: '',
             body: '',
-            image: Container(
+            image: SizedBox(
               width: double.infinity,
               child: Image.asset(
                 AppAssets.intro2,
@@ -64,7 +65,7 @@ class _introState extends State<Intro> {
             ),
             title: '',
             body: '',
-            image: Container(
+            image: SizedBox(
               width: double.infinity,
               child: Image.asset(
                 AppAssets.intro3,
@@ -79,7 +80,7 @@ class _introState extends State<Intro> {
             ),
             title: '',
             body: '',
-            image: Container(
+            image: SizedBox(
               width: double.infinity,
               child: Image.asset(
                 AppAssets.intro4,
@@ -94,7 +95,7 @@ class _introState extends State<Intro> {
             ),
             title: '',
             body: '',
-            image: Container(
+            image: SizedBox(
               width: double.infinity,
               child: Image.asset(
                 AppAssets.intro5,

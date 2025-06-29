@@ -1,0 +1,45 @@
+import 'package:dio/dio.dart';
+
+class ApiManger {
+  static final dio = Dio();
+
+  Future<Response> getData({
+    required String baseUrl,
+    required String endPoint,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+  }) {
+    return dio.get(
+      baseUrl + endPoint,
+      queryParameters: queryParameters,
+      options: Options(
+        validateStatus: (status) => true,
+        headers: {
+          "Content-Type": "application/json",
+          if (headers != null) ...headers //spread operator
+        },
+      ),
+    );
+  }
+
+  Future<Response> postData({
+    required String baseUrl,
+    required String endPoint,
+    Map<String, dynamic>? queryParameters,
+    Object? body,
+  }) {
+    return dio.post(
+      baseUrl + endPoint,
+      queryParameters: queryParameters,
+      data: body,
+      options: Options(
+        validateStatus: (status) => true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      ),
+    );
+  }
+
+  /// get user date
+}
