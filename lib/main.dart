@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami/Providers/MostRecentProviders.dart';
 import 'package:provider/provider.dart';
 
@@ -6,8 +7,12 @@ import 'Ui/HomeScreen/HomeScreen.dart';
 import 'Ui/HomeScreen/tabs/QuranTab/QuranDetails.dart';
 import 'Ui/Introdaction/Intro.dart';
 import 'Utils/AppTheme.dart';
+import 'Utils/my_BlocObserver.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Bloc.observer = MyBlocObserver();
   runApp(
     ChangeNotifierProvider(
       create: (BuildContext context) => MostRecentProviders(),

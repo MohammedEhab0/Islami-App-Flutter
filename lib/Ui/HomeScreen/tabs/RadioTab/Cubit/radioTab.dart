@@ -5,7 +5,6 @@ import 'package:islami/Ui/HomeScreen/tabs/RadioTab/RadioItem.dart';
 import 'package:islami/Utils/AppColors.dart';
 
 import '../../../../../Utils/AppStyles.dart';
-import '../../../../../model/reciters.dart';
 import 'RadioTabViewModel.dart';
 
 class RadioTab extends StatefulWidget {
@@ -28,7 +27,7 @@ class _RadioTabState extends State<RadioTab> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: width * .04),
       child: Column(
@@ -37,75 +36,83 @@ class _RadioTabState extends State<RadioTab> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Expanded(
-                  child: radioButton(
-                      index: 0,
-                      buttonName: 'Radio',
-                      onClick: viewModel.fetchReciters())),
+                child: radioButton(
+                  index: 0,
+                  buttonName: 'Radio',
+                  onClick: () {
+                    setState(() {
+                      selectedIndex = 0;
+                    });
+                    viewModel.fetchReciters();
+                  },
+                ),
+              ),
               SizedBox(width: width * .05),
               Expanded(
                 child: radioButton(
-                    index: 1,
-                    buttonName: 'Reciters',
-                    onClick: viewModel.fetchReciters()),
+                  index: 1,
+                  buttonName: 'Reciters',
+                  onClick: () {
+                    setState(() {
+                      selectedIndex = 1;
+                    });
+                    viewModel.fetchReciters();
+                  },
+                ),
               ),
             ],
           ),
-          BlocBuilder<RadioTabViewModel, RadioTabState>(
+          const SizedBox(height: 20),
+          Expanded(
+            child: BlocBuilder<RadioTabViewModel, RadioTabState>(
               bloc: viewModel,
               builder: (context, state) {
                 if (state is RadioTabLoadingState) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is RadioTabErrorState) {
-                  return Center(
-                    child: Text(state.error, style: AppStyles.bold16White),
+                  return Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      Text(
+                        'حدث خطأ أثناء تحميل القراء.\nيرجى المحاولة لاحقًا.',
+                        style: AppStyles.bold16White,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   );
                 } else if (state is RadioTabSuccessState) {
-                  Expanded(
-                      child: RadioItem(
-                          itemCount: state.reciters.length,
-                          radioList: state.reciters));
+                  return RadioItem(
+                    itemCount: state.reciters.length,
+                    radioList: state.reciters,
+                  );
+                } else {
+                  return const Center(child: Text("Something went wrong."));
                 }
-                return Center(child: Text("Something went wrong."));
-              })
+              },
+            ),
+          ),
         ],
       ),
     );
   }
 
-  ElevatedButton radioButton(
-      {required int index,
-      required String buttonName,
-      required Future<Reciter?> onClick}) {
-    return selectedIndex == index
-        ? ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.Black,
-              foregroundColor: AppColors.White,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            onPressed: () {
-              selectedIndex = index;
-              onClick;
-              setState(() {});
-            },
-            child: Text(buttonName),
-          )
-        : ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.gold,
-              foregroundColor: AppColors.Black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            onPressed: () {
-              selectedIndex = index;
-              onClick;
-              setState(() {});
-            },
-            child: Text(buttonName),
-          );
+  Widget radioButton({
+    required int index,
+    required String buttonName,
+    required VoidCallback onClick,
+  }) {
+    final isSelected = selectedIndex == index;
+
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? AppColors.Black : AppColors.gold,
+        foregroundColor: isSelected ? AppColors.White : AppColors.Black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+      onPressed: onClick,
+      child: Text(buttonName),
+    );
   }
 }
