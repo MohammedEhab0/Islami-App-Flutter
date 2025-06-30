@@ -26,72 +26,74 @@ class _QuranTabState extends State<QuranTab> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     provider = Provider.of<MostRecentProviders>(context);
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: width * .0465),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: width * .0465),
+      child: ListView(
         children: [
-          Row(),
+          SizedBox(height: height * 0.01),
+
+          // Search Field
           Padding(
-              padding: EdgeInsets.symmetric(vertical: height * .01),
-              child: TextField(
-                style: AppStyles.bold16White,
-                onChanged: (newText) {
-                  filterByNewText(newText);
-                },
-                cursorColor: AppColors.gold,
-                decoration: InputDecoration(
-                    hintText: 'Sura Name',
-                    hintStyle: AppStyles.bold16White,
-                    prefixIcon: ImageIcon(
-                      AssetImage(
-                        AppAssets.quranIcon,
-                      ),
-                      color: AppColors.gold,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: AppColors.gold, width: 2)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide:
-                            BorderSide(color: AppColors.gold, width: 2))),
-              )),
+            padding: EdgeInsets.symmetric(vertical: height * .01),
+            child: TextField(
+              style: AppStyles.bold16White,
+              onChanged: (newText) => filterByNewText(newText),
+              cursorColor: AppColors.gold,
+              decoration: InputDecoration(
+                hintText: 'Sura Name',
+                hintStyle: AppStyles.bold16White,
+                prefixIcon: ImageIcon(
+                  AssetImage(AppAssets.quranIcon),
+                  color: AppColors.gold,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: AppColors.gold, width: 2),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: AppColors.gold, width: 2),
+                ),
+              ),
+            ),
+          ),
+
+          // Most Recent Suras
           MostRecent(),
           SizedBox(height: height * .02),
+
+          // Title
           Text(
             'Suras List',
             style: AppStyles.bold16White,
           ),
           SizedBox(height: height * .02),
-          Expanded(
-            child: ListView.separated(
-                padding: EdgeInsets.zero,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(QuranDetails.routeName,
-                          arguments: filterList[index]);
-                      provider.updateMostResentList(filterList[index]);
-                    },
-                    child: SuraList(
-                      index: filterList[index],
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return SizedBox(
-                    height: height * .03,
-                    child: Divider(
-                      color: AppColors.White,
-                      thickness: 1,
-                      indent: width * .09,
-                      endIndent: width * .09,
-                    ),
-                  );
-                },
-                itemCount: filterList.length),
+
+          // Sura List
+          ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: filterList.length,
+            separatorBuilder: (context, index) => SizedBox(
+              height: height * .03,
+              child: Divider(
+                color: AppColors.White,
+                thickness: 1,
+                indent: width * .09,
+                endIndent: width * .09,
+              ),
+            ),
+            itemBuilder: (context, index) => InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  QuranDetails.routeName,
+                  arguments: filterList[index],
+                );
+                provider.updateMostResentList(filterList[index]);
+              },
+              child: SuraList(index: filterList[index]),
+            ),
           ),
         ],
       ),
@@ -101,17 +103,16 @@ class _QuranTabState extends State<QuranTab> {
   void filterByNewText(String newText) {
     List<int> newFilterList = [];
     for (int i = 0; i < QuranContent.arabicAuranSuras.length; i++) {
-      if (QuranContent.arabicAuranSuras[i]
-          .toLowerCase()
-          .contains(newText.toLowerCase())) {
-        newFilterList.add(i);
-      } else if (QuranContent.englishQuranSurahs[i]
-          .toLowerCase()
-          .contains(newText.toLowerCase())) {
+      final arabicName = QuranContent.arabicAuranSuras[i];
+      final englishName = QuranContent.englishQuranSurahs[i];
+
+      if (arabicName.toLowerCase().contains(newText.toLowerCase()) ||
+          englishName.toLowerCase().contains(newText.toLowerCase())) {
         newFilterList.add(i);
       }
     }
-    filterList = newFilterList;
-    setState(() {});
+    setState(() {
+      filterList = newFilterList;
+    });
   }
 }

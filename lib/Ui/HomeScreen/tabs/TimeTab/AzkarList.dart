@@ -50,23 +50,25 @@ class _AzkarlistState extends State<Azkarlist> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    return CarouselSlider(
-      options: CarouselOptions(
-        enlargeFactor: .1,
-        viewportFraction: .83,
-        enlargeCenterPage: true,
-        height: height * .7,
+    return Scaffold(
+      body: CarouselSlider(
+        options: CarouselOptions(
+          enlargeFactor: .1,
+          viewportFraction: .83,
+          enlargeCenterPage: true,
+          height: height * .7,
+        ),
+        items: List.generate(azkarItems.length, (i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: AzkarItem(index: i, category: category),
+              );
+            },
+          );
+        }),
       ),
-      items: List.generate(azkarItems.length, (i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 5.0),
-              child: AzkarItem(index: i, category: category),
-            );
-          },
-        );
-      }),
     );
   }
 }
