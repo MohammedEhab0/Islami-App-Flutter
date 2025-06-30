@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'Ui/HomeScreen/HomeScreen.dart';
 import 'Ui/HomeScreen/tabs/QuranTab/QuranDetails.dart';
+import 'Ui/HomeScreen/tabs/TimeTab/AzkarList.dart';
 import 'Ui/Introdaction/Intro.dart';
 import 'Utils/AppTheme.dart';
 import 'Utils/my_BlocObserver.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
           HomeScreen.routeName: (context) => const HomeScreen(),
           Intro.routeName: (context) => const Intro(),
           QuranDetails.routeName: (context) => QuranDetails(),
+          Azkarlist.routeName: (context) => Azkarlist(),
         });
   }
 }

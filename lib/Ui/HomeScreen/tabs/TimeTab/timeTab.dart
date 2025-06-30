@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:islami/Ui/HomeScreen/tabs/TimeTab/Azkar.dart';
+import 'package:islami/Ui/HomeScreen/tabs/TimeTab/AzkarList.dart';
 import 'package:islami/Ui/HomeScreen/tabs/TimeTab/cubit/PrayTimeStates.dart';
 
 import '../../../../Utils/AppAssets.dart';
@@ -147,12 +148,30 @@ class _TimeTabState extends State<TimeTab> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Azkar(
-                azkarIcon: AppAssets.morningAzkar,
-                azkarName: 'MorningAzkar',
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    Azkarlist.routeName,
+                    arguments: 'أذكار الصباح',
+                  );
+                },
+                child: Azkar(
+                  azkarIcon: AppAssets.morningAzkar,
+                  azkarName: 'MorningAzkar',
+                ),
               ),
-              Azkar(
-                  azkarIcon: AppAssets.eveningAzkar, azkarName: 'EveningAzkar')
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    Azkarlist.routeName,
+                    arguments: 'أذكار المساء',
+                  );
+                },
+                child: Azkar(
+                  azkarIcon: AppAssets.eveningAzkar,
+                  azkarName: 'EveningAzkar',
+                ),
+              ),
             ],
           )
         ],
